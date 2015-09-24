@@ -4,6 +4,7 @@ gem "rake"
 gem "oga"
 gem "faraday"
 gem "whenever"
+gem "virtus"
 
 group :development, :test do
   gem "rspec"
