@@ -3,6 +3,7 @@ GEM
   specs:
     ansi (1.5.0)
     ast (2.1.0)
+    chronic (0.10.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     multipart-post (2.0.0)
@@ -12,6 +13,8 @@ GEM
     ruby-ll (2.1.2)
       ansi
       ast
+    whenever (0.9.4)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -19,3 +22,4 @@ PLATFORMS
 DEPENDENCIES
   faraday
   oga
+  whenever
