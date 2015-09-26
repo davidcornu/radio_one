@@ -11,17 +11,32 @@ module RadioOne
     end
 
     def download!
-      target_dir = File.expand_path("../../output", __dir__)
       FileUtils.mkdir_p(target_dir)
-      headers = {"Cookie" => segments[:auth_cookies].join("; ")}
-      output = BulkDownloader.new(segments[:urls], target_dir, headers: headers).download!
-      FFmpeg.concatenate!(
-        output.values,
-        File.expand_path("../../output/#{@episode.media_pid}.aac", __dir__)
-      )
+
+      downloads = BulkDownloader.new(
+        segments[:urls],
+        target_dir,
+        headers: {"Cookie" => segments[:auth_cookies].join("; ")}
+      ).download!
+
+      FFmpeg.concatenate!(downloads.values, target_file)
+
+      target_file
+    end
+
+    def cleanup!
+      FileUtils.rm_rf(target_dir)
     end
 
     private
+
+    def target_dir
+      File.join(RadioOne.tmp_dir, @episode.media_pid)
+    end
+
+    def output_file
+      File.join(target_dir, "#{@episode.media_pid}.aac")
+    end
 
     def base_url
       "http://open.live.bbc.co.uk/mediaselector/5/redir/version/2.0/vpid/#{@episode.media_pid}/mediaset/audio-syndication/proto/http"
