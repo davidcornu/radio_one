@@ -35,8 +35,7 @@ class BulkDownloader
     worker = Thread.new do
       begin
         while url = queue.pop(true)
-          # ShellCommand.run!(*curl_command_for_url(url))
-          puts curl_command_for_url(url).inspect
+          ShellCommand.run!(*curl_command_for_url(url))
         end
       rescue ThreadError => e
         raise e unless e.message == "queue empty"
