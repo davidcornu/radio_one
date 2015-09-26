@@ -1,5 +1,4 @@
-require 'faraday'
-require 'json'
+require 'logger'
 
 module RadioOne
   class Error < StandardError; end
@@ -22,6 +21,10 @@ module RadioOne
 
     def config
       @config ||= load_config
+    end
+
+    def logger
+      @logger ||= Logger.new($stdout)
     end
 
     private
