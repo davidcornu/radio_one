@@ -6,6 +6,8 @@ require_relative "../radio_one"
 
 module RadioOne
   class FeedBuilder
+    include ERB::Util
+
     def self.template
       @template ||= begin
         template_path = File.expand_path("./rss_feed.erb", __dir__)
