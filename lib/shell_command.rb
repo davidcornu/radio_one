@@ -23,9 +23,6 @@ module ShellCommand
         ].join("\n")
         raise Error, error_message
       end
-
-      logger.debug(stderr)
-
       stdout
     end
   end
