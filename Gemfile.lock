@@ -9,22 +9,12 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    axiom-types (0.1.1)
-      descendants_tracker (~> 0.0.4)
-      ice_nine (~> 0.11.0)
-      thread_safe (~> 0.3, >= 0.3.1)
     byebug (5.0.0)
       columnize (= 0.9.0)
     chronic (0.10.2)
     coderay (1.1.0)
-    coercible (1.0.0)
-      descendants_tracker (~> 0.0.1)
     columnize (0.9.0)
-    descendants_tracker (0.0.4)
-      thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
-    equalizer (0.0.11)
-    ice_nine (0.11.1)
     method_source (0.8.2)
     multipart-post (2.0.0)
     pry (0.10.1)
@@ -49,12 +39,6 @@ GEM
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
     slop (3.6.0)
-    thread_safe (0.3.5)
-    virtus (1.0.5)
-      axiom-types (~> 0.1)
-      coercible (~> 1.0)
-      descendants_tracker (~> 0.0, >= 0.0.3)
-      equalizer (~> 0.0, >= 0.0.9)
     whenever (0.9.4)
       chronic (>= 0.6.3)
 
@@ -66,7 +50,6 @@ DEPENDENCIES
   pry-byebug
   rake
   rspec
-  virtus
   whenever
 
 BUNDLED WITH
