@@ -3,6 +3,8 @@ require_relative './episode'
 
 module RadioOne
   class Programme
+    attr_reader :pid
+
     def initialize(pid)
       @pid = pid
     end
