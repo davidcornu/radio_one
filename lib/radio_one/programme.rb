@@ -22,7 +22,15 @@ module RadioOne
     end
 
     def episodes
-      @episodes ||= raw_episodes.map { |e| Episode.new(e["pid"]) }
+      @episodes ||= raw_episodes.map { |e| Episode.new(e["pid"], self) }
+    end
+
+    def link
+      "http://www.bbc.co.uk/programmes/#{@pid}"
+    end
+
+    def feed_builder
+      @feed_builder ||= FeedBuilder.new(self)
     end
 
     private

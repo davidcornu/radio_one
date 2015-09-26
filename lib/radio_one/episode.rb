@@ -3,10 +3,11 @@ require_relative './episode_downloader'
 
 module RadioOne
   class Episode
-    attr_reader :pid
+    attr_reader :pid, :programme
 
-    def initialize(pid)
+    def initialize(pid, programme)
       @pid = pid
+      @programme = programme
     end
 
     def title
@@ -15,6 +16,10 @@ module RadioOne
 
     def synopsis
       raw_info["medium_synopsis"] || info["short_synopsis"]
+    end
+
+    def link
+      "http://www.bbc.co.uk/programmes/#{@pid}"
     end
 
     def image_url
@@ -44,11 +49,19 @@ module RadioOne
       end
     end
 
-    def downloader
-      @downloader ||= EpisodeDownloader.new(self)
+    def filename
+      @filename ||= downloader.download!
+    end
+
+    def filesize
+      File.size(filename)
     end
 
     private
+
+    def downloader
+      @downloader ||= EpisodeDownloader.new(self)
+    end
 
     def http
       RadioOne.http

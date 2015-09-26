@@ -11,31 +11,36 @@ module RadioOne
     end
 
     def download!
-      FileUtils.mkdir_p(target_dir)
+      return output_file if File.exist?(output_file)
+
+      FileUtils.mkdir_p(download_dir)
 
       downloads = BulkDownloader.new(
         segments[:urls],
-        target_dir,
+        download_dir,
         headers: {"Cookie" => segments[:auth_cookies].join("; ")}
       ).download!
 
-      FFmpeg.concatenate!(downloads.values, target_file)
+      FileUtils.mkdir_p(output_dir)
+      FFmpeg.concatenate!(downloads.values, output_file)
 
-      target_file
-    end
-
-    def cleanup!
-      FileUtils.rm_rf(target_dir)
+      output_file
+    ensure
+      FileUtils.rm_rf(download_dir)
     end
 
     private
 
-    def target_dir
+    def download_dir
       File.join(RadioOne.tmp_dir, @episode.media_pid)
     end
 
+    def output_dir
+      File.join(RadioOne.public_dir, @episode.programme.pid)
+    end
+
     def output_file
-      File.join(target_dir, "#{@episode.media_pid}.aac")
+      File.join(output_dir, "#{@episode.media_pid}.aac")
     end
 
     def base_url
