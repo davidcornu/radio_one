@@ -9,18 +9,14 @@
     <title><%=h @programme.title %></title>
     <url><%=h @programme.image_url %></url>
   </image>
-  <lastBuildDate><%=h Time.now.utc.iso8601 %></lastBuildDate>
+  <lastBuildDate><%=h Time.now.utc.rfc822 %></lastBuildDate>
   <ttl>3600</ttl>
   <% @programme.episodes.each do |episode| %>
     <item>
       <guid isPermaLink="true"><%=h episode.link %></guid>
       <title><%=h episode.title %></title>
       <link><%=h episode.link %></link>
-      <image>
-        <link><%=h episode.link %></link>
-        <title><%=h episode.title %></title>
-        <url><%=h episode.image_url %></url>
-      </image>
+      <pubDate><%=h episode.broadcasted_at.rfc822 %></pubDate>
       <description><![CDATA[
         <p><%=h episode.synopsis %></p>
         <table>

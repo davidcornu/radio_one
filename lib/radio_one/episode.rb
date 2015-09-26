@@ -26,6 +26,10 @@ module RadioOne
       "http://ichef.bbci.co.uk/images/ic/480x270/#{raw_info["image"]["pid"]}.jpg"
     end
 
+    def broadcasted_at
+      Time.parse(raw_info["first_broadcast_date"])
+    end
+
     def media_pid
       raw_info["versions"].find { |v| v["canonical"] == 1 }["pid"]
     end
