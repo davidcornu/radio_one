@@ -1,4 +1,6 @@
 require 'logger'
+require 'json'
+require 'faraday'
 
 module RadioOne
   class Error < StandardError; end
@@ -21,6 +23,10 @@ module RadioOne
 
     def config
       @config ||= load_config
+    end
+
+    def asset_host
+      config.fetch(:asset_host, "127.0.0.1")
     end
 
     def logger
