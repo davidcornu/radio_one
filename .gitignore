@@ -2,3 +2,4 @@ tmp/*
 public/*
 vendor
 .bundle
+config.json
