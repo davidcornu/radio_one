@@ -42,11 +42,15 @@ module RadioOne
       end
     end
 
-    def downloader
-      @downloader ||= EpisodeDownloader.new(self)
+    def download!
+      download.download!
     end
 
     private
+
+    def downloader
+      @downloader ||= EpisodeDownloader.new(self)
+    end
 
     def http
       RadioOne.http
