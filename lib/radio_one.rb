@@ -36,7 +36,7 @@ module RadioOne
     private
 
     def load_config
-      raw_config = File.read(File.expand_path("../config.json", __dir__))
+      raw_config = File.read(File.expand_path("../config/config.json", __dir__))
       JSON.parse(raw_config, symbolize_names: true)
     end
   end
