@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
-  <title><%= @programme.title %></title>
-  <description><%= @programme.synopsis %></description>
-  <link><%= @programme.link %></link>
+  <title><%=h @programme.title %></title>
+  <description><%=h @programme.synopsis %></description>
+  <link><%=h @programme.link %></link>
   <image>
-    <link><%= @programme.link %></link>
-    <title><%= @programme.title %></title>
-    <url><%= @programme.image_url %></url>
+    <link><%=h @programme.link %></link>
+    <title><%=h @programme.title %></title>
+    <url><%=h @programme.image_url %></url>
   </image>
-  <lastBuildDate><%= Time.now.utc.iso8601 %></lastBuildDate>
+  <lastBuildDate><%=h Time.now.utc.iso8601 %></lastBuildDate>
   <ttl>3600</ttl>
   <% @programme.episodes.each do |episode| %>
     <item>
-      <guid isPermaLink="true"><%= episode.link %></guid>
-      <title><%= episode.title %></title>
-      <link><%= episode.link %></link>
+      <guid isPermaLink="true"><%=h episode.link %></guid>
+      <title><%=h episode.title %></title>
+      <link><%=h episode.link %></link>
       <image>
-        <link><%= episode.link %></link>
-        <title><%= episode.title %></title>
-        <url><%= episode.image_url %></url>
+        <link><%=h episode.link %></link>
+        <title><%=h episode.title %></title>
+        <url><%=h episode.image_url %></url>
       </image>
       <description><![CDATA[
-        <p><%= episode.synopsis %></p>
+        <p><%=h episode.synopsis %></p>
         <table>
           <% episode.tracks.each do |track| %>
             <tr>
-              <td><%= track[:title] %></td>
-              <td><%= track[:artist] %></td>
-              <td><%= track[:label] %></td>
+              <td><%=h track[:title] %></td>
+              <td><%=h track[:artist] %></td>
+              <td><%=h track[:label] %></td>
             </tr>
           <% end %>
         </table>
       ]]></description>
-      <enclosure length="<%= episode.filesize %>" type="audio/aac" url="<%= public_url(episode.filename) %>"/>
+      <enclosure length="<%=h episode.filesize %>" type="audio/aac" url="<%=h public_url(episode.filename) %>"/>
     </item>
   <% end %>
 </channel>
