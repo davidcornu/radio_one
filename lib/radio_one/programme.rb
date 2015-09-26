@@ -1,5 +1,6 @@
 require_relative '../radio_one'
 require_relative './episode'
+require_relative './feed_builder'
 
 module RadioOne
   class Programme
