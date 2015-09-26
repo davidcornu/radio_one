@@ -29,7 +29,7 @@ module RadioOne
         artists_by_role = s["contributions"].each_with_object({}) do |c, h|
           (h[c["role"]] ||= []) << c["name"]
         end
-        
+
         if featured_artists = artists_by_role["Featured Artist"]
           title += " - feat. #{featured_artists.join(", ")}"
         end
@@ -42,15 +42,11 @@ module RadioOne
       end
     end
 
-    def download!
-      download.download!
-    end
-
-    private
-
     def downloader
       @downloader ||= EpisodeDownloader.new(self)
     end
+
+    private
 
     def http
       RadioOne.http
