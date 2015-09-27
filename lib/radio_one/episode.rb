@@ -97,6 +97,7 @@ module RadioOne
 
     def fetch_raw_segments
       response = http.get(segments_url)
+      return [] if response.status == 404
       unless response.success?
         raise Error, "Failed to fetch segments for episode #{@pid}"
       end
