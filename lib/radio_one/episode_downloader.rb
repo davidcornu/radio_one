@@ -58,7 +58,7 @@ module RadioOne
     def fetch_stream_info_url
       response = http.get(base_url)
       if response.status != 302
-        raise Error, "Failed to fetch strema info url for media #{@episode.media_pid}"
+        raise Error, "Failed to fetch stream info url for media #{@episode.media_pid}"
       end
       response.headers["Location"]
     end
