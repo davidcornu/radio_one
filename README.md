@@ -18,3 +18,14 @@ Steps to perform on a Ubuntu 15.04 x64 image on DigitalOcean.
 - `git clone git@github.com:davidcornu/radio_one.git`
 - `cd radio_one`
 - `bundle install --path vendor/bundle --without test development`
+- `bundle exec whenever --update-crontab`
+
+**Nginx Config**
+
+```
+server {
+  listen 80;
+  root /home/deploy/radio_one/public;
+  autoindex on;
+}
+```
