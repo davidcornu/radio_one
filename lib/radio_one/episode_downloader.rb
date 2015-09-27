@@ -44,7 +44,7 @@ module RadioOne
     end
 
     def base_url
-      "http://open.live.bbc.co.uk/mediaselector/5/redir/version/2.0/vpid/#{@episode.media_pid}/mediaset/audio-syndication/proto/http"
+      "http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/vpid/#{@episode.media_pid}/format/json/mediaset/apple-iphone4-hls/"
     end
 
     def http
@@ -57,10 +57,17 @@ module RadioOne
 
     def fetch_stream_info_url
       response = http.get(base_url)
-      if response.status != 302
+      unless response.success?
         raise Error, "Failed to fetch stream info url for media #{@episode.media_pid}"
       end
-      response.headers["Location"]
+
+      connection = JSON.parse(response.body)
+        .fetch("media", [{}])
+        .first.fetch("connection", [])
+        .find { |c| c["protocol"] == "http" }
+
+      return connection["href"] if connection
+      raise Error, "Could not find http stream for media #{@episode.media_pid}"
     end
 
     class NaiveParamsEncoder
