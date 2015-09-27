@@ -11,6 +11,7 @@ Steps to perform on a Ubuntu 15.04 x64 image on DigitalOcean.
 - `sudo apt-add-repository ppa:brightbox/ruby-ng`
 - `sudo apt-get update`
 - `sudo apt-get install curl ffmpeg git ruby2.2 nginx vim`
+- `sudo gem install bundler`
 - `sudo ufw allow 22`
 - `sudo ufw allow 80`
 - `sudo ufw enable`
