@@ -41,13 +41,15 @@ module RadioOne
           (h[c["role"]] ||= []) << c["name"]
         end
 
-        if featured_artists = artists_by_role["Featured Artist"]
-          title += " - feat. #{featured_artists.join(", ")}"
+        artists = artists_by_role["Performer"] || artists_by_role["Featured Artist"] || []
+
+        if artists_by_role["Performer"] && artists_by_role["Featured Artist"]
+          title += (" - feat. " + artists_by_role["Featured Artist"].join(", "))
         end
 
         {
           title: title,
-          artist: artists_by_role["Performer"].join(", "),
+          artist: artists.join(", "),
           label: s["record_label"]
         }
       end
