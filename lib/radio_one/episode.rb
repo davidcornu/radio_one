@@ -27,7 +27,12 @@ module RadioOne
     end
 
     def broadcasted_at
-      Time.parse(raw_info["first_broadcast_date"])
+      timestamp = raw_info["first_broadcast_date"]
+      if timestamp.is_a?(String) && !timestamp.empty?
+        Time.parse(timestamp)
+      else
+        Time.now
+      end
     end
 
     def media_pid
