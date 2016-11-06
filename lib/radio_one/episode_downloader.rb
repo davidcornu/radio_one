@@ -94,7 +94,7 @@ module RadioOne
         raise Error, "Failed to fetch stream info for media #{@episode.media_pid}"
       end
 
-      auth_cookies = response.headers["Set-Cookie"]
+      auth_cookies = response.headers.fetch("Set-Cookie", "")
         .split(/,\s?/)
         .map { |c| c.split(/;\s?/).first }
 
