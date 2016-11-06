@@ -7,10 +7,11 @@ module FFmpeg
     manifest_file = Tempfile.new("ffmpeg-manifest")
     manifest_file.write(files.map { |f| "file '#{f}'" }.join("\n") + "\n")
     manifest_file.close
-    
+
     ShellCommand.run!(
       "ffmpeg",
       "-f", "concat",
+      "-safe", "0",
       "-i", manifest_file.path,
       "-vn",
       "-acodec", "copy",
